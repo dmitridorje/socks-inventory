@@ -165,15 +165,17 @@ public class SockServiceImpl implements SockService {
             String[] line;
 
             csvReader.readNext();
+            int lineNumber = 1;
 
             while ((line = csvReader.readNext()) != null) {
+                lineNumber++;
                 if (line.length != 3) {
                     log.error("Invalid CSV format: {}", (Object) line);
                     throw new IllegalArgumentException("Invalid CSV format. " +
                             "Each line must have 3 columns: color, cottonPart, quantity");
                 }
 
-                Object[] validatedFields = validateCsvFields(line);
+                Object[] validatedFields = validateCsvFields(line, lineNumber);
                 SockColor color = (SockColor) validatedFields[0];
                 int cottonPart = (int) validatedFields[1];
                 int quantity = (int) validatedFields[2];
@@ -188,31 +190,29 @@ public class SockServiceImpl implements SockService {
         log.info("CSV file processed successfully: {}", file.getOriginalFilename());
     }
 
-    private Object[] validateCsvFields(String[] line) {
+    private Object[] validateCsvFields(String[] line, int lineNumber) {
         SockColor color;
         try {
             color = validator.validateAndParseColor(line[0].trim());
         } catch (IllegalArgumentException e) {
-            log.error("Invalid color in csv: {}", line[0]);
-            throw new IllegalArgumentException("Invalid color: " + line[0]);
+            log.error("Invalid color: {} in csv file line {}", line[0], lineNumber);
+            throw new IllegalArgumentException("Invalid color: " + line[0] + ". See CSV file line no. " + lineNumber);
         }
 
         int cottonPart;
         try {
             cottonPart = validator.validateCottonPart(Integer.parseInt(line[1].trim()));
         } catch (IllegalArgumentException e) {
-            log.error("Invalid cottonPart in csv: {}", line[1]);
-            throw new IllegalArgumentException("Invalid cotton percentage: " + line[1] +
-                    ". Cotton percentage must be between 0 and 100.");
+            log.error("Invalid cottonPart: {} in csv file line {}", line[1], lineNumber);
+            throw new IllegalArgumentException("Invalid cotton percentage: " + line[1] + ". See CSV file line no. " + lineNumber);
         }
 
         int quantity;
         try {
             quantity = validator.validateQuantity(Integer.parseInt(line[2].trim()));
         } catch (IllegalArgumentException e) {
-            log.error("Invalid quantity value in CSV: {}", line[2]);
-            throw new IllegalArgumentException("Invalid quantity: " + line[2] +
-                    ". Quantity must be a valid integer greater than zero.");
+            log.error("Invalid quantity value: {} in csv file line {}", line[2], lineNumber);
+            throw new IllegalArgumentException("Invalid quantity: " + line[2] + ". See CSV file line no. " + lineNumber);
         }
 
         return new Object[]{color, cottonPart, quantity};

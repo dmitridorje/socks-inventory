@@ -43,19 +43,21 @@ PostgreSQL будет доступен на `localhost:5434`.
 ### 4. Запуск приложения
 Запустите собранный JAR-файл:
 ```bash
-java -jar build/libs/socks-management-0.0.1-SNAPSHOT.jar
+java -jar build/libs/SocksManagement.jar
 ```
 
 ### 5. Работа в приложени
 При первом запуске в БД будет автоматически создана нужная таблица и в неё будут внесены несколько тестовых записей:
 
+```bash
 INSERT INTO sock (color, cotton_part, quantity)
 VALUES ('BLACK', 10, 1),
        ('WHITE', 13, 3),
        ('RED', 16, 5),
        ('PINK', 19, 7),
        ('GREEN', 22, 9),
-       ('PURPLE', 25, 11);`
+       ('PURPLE', 25, 11);
+```
 
 Приложение доступно:
 

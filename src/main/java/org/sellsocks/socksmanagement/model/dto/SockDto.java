@@ -1,5 +1,6 @@
 package org.sellsocks.socksmanagement.model.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class SockDto {
 
+    @Schema(hidden = true)
     private Long id;
 
     @NotBlank(message = "Color must not be blank")

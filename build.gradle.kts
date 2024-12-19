@@ -69,7 +69,6 @@ dependencies {
 	implementation(platform("org.testcontainers:testcontainers-bom:1.18.0"))
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:postgresql")
-	testImplementation("com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6")
 }
 
 /**
@@ -137,4 +136,12 @@ tasks.jacocoTestCoverageVerification {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+springBoot {
+	mainClass = "org.sellsocks.socksmanagement.SocksManagementApplication"
+}
+
+tasks.bootJar {
+	archiveFileName.set("SocksManagement.jar")
 }
