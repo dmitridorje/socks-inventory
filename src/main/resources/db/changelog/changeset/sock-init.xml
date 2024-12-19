@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1-create-sock-table" author="dmitridorje">
+        <createTable tableName="sock">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="color" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cotton_part" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2-add-check-constraint" author="dmitridorje">
+        <sql>
+            ALTER TABLE sock
+                ADD CONSTRAINT ck_cotton_part_range
+                    CHECK (cotton_part &gt;= 0 AND cotton_part &lt;= 100);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
