@@ -76,7 +76,8 @@ public class SockParametersValidatorTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> validator.validateAndParseOperation(operation));
 
-        assertEquals("Invalid operation: invalidOperation. Valid values: moreThan, lessThan, equal.", exception.getMessage()); // Проверка сообщения об ошибке
+        assertEquals("Invalid operation: invalidOperation. Valid values: moreThan, lessThan, equal.",
+                exception.getMessage());
     }
 
     @Test
