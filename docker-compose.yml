@@ -1,4 +1,4 @@
-version: '3.8' # Используйте более точную версию
+version: '3.8'
 services:
   master_postgres:
     image: postgres:13.3
