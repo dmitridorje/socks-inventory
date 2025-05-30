@@ -5,6 +5,9 @@ pipeline {
         IMAGE_NAME = 'dmitridorje/socks'
         IMAGE_TAG = 'latest'
         FULL_IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
+
+        JAVA_HOME = '/home/dmitridorje/.sdkman/candidates/java/current'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
