@@ -67,4 +67,25 @@ pipeline {
             }
         }
     }
+
+    post {
+            success {
+                withCredentials([string(credentialsId: 'telegram-bot-token', variable: 'TELEGRAM_TOKEN')]) {
+                    sh '''
+                        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
+                            -d chat_id=1646517486 \
+                            -d text="✅ Jenkins: Сборка ${env.JOB_NAME} #${env.BUILD_NUMBER} прошла успешно!"
+                    '''
+                }
+            }
+            failure {
+                withCredentials([string(credentialsId: 'telegram-bot-token', variable: 'TELEGRAM_TOKEN')]) {
+                    sh '''
+                        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
+                            -d chat_id=1646517486 \
+                            -d text="❌ Jenkins: Сборка ${env.JOB_NAME} #${env.BUILD_NUMBER} упала."
+                    '''
+                }
+            }
+        }
 }
