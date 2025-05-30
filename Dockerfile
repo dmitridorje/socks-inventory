@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # Указываем арг, который можно будет передать при билде (необязательно)
-ARG JAR_FILE=target/socks.jar
+ARG JAR_FILE=build/libs/SocksManagement.jar
 
 # Копируем jar-файл в контейнер
 COPY ${JAR_FILE} socks.jar
