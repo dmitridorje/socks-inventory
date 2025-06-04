@@ -42,6 +42,11 @@ public class SockController {
     private final SockService sockService;
     private final SockMapper sockMapper;
 
+    @GetMapping("/test")
+    public String testMe() {
+        return "I'm working as intended for testing";
+    }
+
     @Operation(
             summary = "Add incoming socks to inventory",
             description = "This method is used to add new socks to the inventory or update quantities of existing entries."
