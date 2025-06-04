@@ -6,7 +6,7 @@ pipeline {
         IMAGE_TAG = 'latest'
         FULL_IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
 
-        JAVA_HOME = '/home/dmitridorje/.sdkman/candidates/java/current'
+        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
